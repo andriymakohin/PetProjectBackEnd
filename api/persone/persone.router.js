@@ -10,4 +10,10 @@ personeRouter.post(
   personeController.addPersone,
 );
 
+personeRouter.get(
+  "/allPersones",
+  LoginController.authorize,
+  personeController.getAllPersonesCurrentUser
+)
+
 module.exports = personeRouter;

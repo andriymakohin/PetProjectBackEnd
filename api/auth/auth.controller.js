@@ -43,7 +43,7 @@ class GoogleOAuthController {
   googleGetCodeLogin() {
     const params = queryString.stringify({
       client_id:
-      "103633925093-knsdgjt9l80fe7kjqq5camlg351quq1r.apps.googleusercontent.com", //  Заглушка , тут буде id сервіса
+      "103633925093-sa06hnpgi4s7v6okn3c01t464lcdebnf.apps.googleusercontent.com", //  Заглушка , тут буде id сервіса
       redirect_uri: `http://localhost:1717/api/auth/google/callback`, //  Заглушка url сервіса /api/auth/google/callback
       scope: [
         'https://www.googleapis.com/auth/userinfo.email',
@@ -62,8 +62,8 @@ class GoogleOAuthController {
     return await axios
       .post('https://oauth2.googleapis.com/token', {
         client_id:
-        "103633925093-knsdgjt9l80fe7kjqq5camlg351quq1r.apps.googleusercontent.com", //  Заглушка
-        client_secret: 'I9CSPs3RUwOKVAG2OhAYEuYd', //  Заглушка
+        "103633925093-sa06hnpgi4s7v6okn3c01t464lcdebnf.apps.googleusercontent.com", //  Заглушка
+        client_secret: 'VM0kvschNbwDjhIIcyGxcouF', //  Заглушка
         redirect_uri: `http://localhost:1717/api/auth/google/callback`, //  Заглушка url /api/auth/google/callback
         grant_type: 'authorization_code',
         code,
@@ -106,39 +106,33 @@ exports.initUser = async function initifacationUser(req, res) {
         expiresIn: '1h',
       },
     );
-    const refresh_token = await jwt.sign(
+    const refreshToken = await jwt.sign(
       {
         uid: user.id || user._id,
-        sid:session._id,
+        sid: session._id,
       },
       process.env.TOKEN_SECRET,
       {
         expiresIn: '30d',
       },
     );
-   console.log('user :', user);
-   console.log('access_token :', access_token );
-   console.log('refresh_token :');
-    return res.status(201).json({
-      user:{
-        _id:user._id,
-        username:user.username,
-        email:user.email,
-        avatarURL:user.avatarURL,
-        persone:user.persones
-      },
-      access_token,
-      refresh_token,
-    });
+    //  openID
+
+    return res
+      .status(200)
+      .redirect(
+        `http://localhost:3000/login?token=${access_token}&refreshToken=${refreshToken}`,
+      );
   } catch (error) {
     console.log(error);
   }
 };
 
 async function newUser(user) {
-  const hashPassword = await bcrypt.hash('secretPassword', 5);
+  const hashPassword = await bcrypt.hash('hashPassword', 5);
 
   const newUser = await userModel.create({
+    status: 'verified',
     username: user.name,
     password: hashPassword,
     email: user.email,
