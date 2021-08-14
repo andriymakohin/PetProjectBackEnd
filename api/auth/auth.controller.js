@@ -64,7 +64,7 @@ class GoogleOAuthController {
         client_id:
         "103633925093-sa06hnpgi4s7v6okn3c01t464lcdebnf.apps.googleusercontent.com", //  Заглушка
         client_secret: 'VM0kvschNbwDjhIIcyGxcouF', //  Заглушка
-        redirect_uri: `http://localhost:1717/api/auth/google/callback`, //  Заглушка url /api/auth/google/callback
+        redirect_uri: `https://thawing-inlet-66513.herokuapp.com/api/auth/google/callback`, //  Заглушка url /api/auth/google/callback
         grant_type: 'authorization_code',
         code,
       })
