@@ -121,7 +121,7 @@ exports.initUser = async function initifacationUser(req, res) {
     return res
       .status(200)
       .redirect(
-        `http://localhost:3000/login?token=${access_token}`,
+        `http://localhost:3000/login?token=${access_token}&refreshToken=${access_token}`,
         // &refreshToken=${refreshToken}`,
       );
   } catch (error) {
