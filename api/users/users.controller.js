@@ -52,7 +52,7 @@ class AuthController {
         to: user.email,
         from: process.env.MAIN_POST,
         subject: 'Email Верифікація',
-        text: 'Поничинай користуватись додатком прямо зараз!',
+        text: 'Починай користуватись додатком прямо зараз!',
         html: `
                 <h2>Привіт ${user.username}</h2>
                 <p>Цей додаток допоможе тобі у виконанній домашніх обов'язків</p>

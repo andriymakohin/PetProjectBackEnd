@@ -9,6 +9,10 @@
   },
   "author": "Andrii Makohin",
   "license": "ISC",
+  "keywords": [
+    "planer",
+    "heroku"
+  ],
   "dependencies": {
     "@google-cloud/storage": "^5.6.0",
     "@sendgrid/mail": "^7.4.0",
@@ -28,6 +32,9 @@
     "query-string": "^6.13.7",
     "swagger-ui-express": "^4.1.4",
     "uuid": "^8.3.1"
+  },
+  "engines": {
+    "node": "14.17.1"
   },
   "devDependencies": {}
 }
