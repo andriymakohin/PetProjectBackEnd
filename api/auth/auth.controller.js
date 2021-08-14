@@ -103,25 +103,26 @@ exports.initUser = async function initifacationUser(req, res) {
       },
       process.env.TOKEN_SECRET,
       {
-        expiresIn: '1h',
-      },
-    );
-    const refreshToken = await jwt.sign(
-      {
-        uid: user.id || user._id,
-        sid: session._id,
-      },
-      process.env.TOKEN_SECRET,
-      {
         expiresIn: '30d',
       },
     );
+    // const refreshToken = await jwt.sign(
+    //   {
+    //     uid: user.id || user._id,
+    //     sid: session._id,
+    //   },
+    //   process.env.TOKEN_SECRET,
+    //   {
+    //     expiresIn: '30d',
+    //   },
+    // );
     //  openID
 
     return res
       .status(200)
       .redirect(
-        `http://localhost:3000/login?token=${access_token}&refreshToken=${refreshToken}`,
+        `http://localhost:3000/login?token=${access_token}`,
+        // &refreshToken=${refreshToken}`,
       );
   } catch (error) {
     console.log(error);
