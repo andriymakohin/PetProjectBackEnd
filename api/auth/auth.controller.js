@@ -44,7 +44,7 @@ class GoogleOAuthController {
     const params = queryString.stringify({
       client_id:
       "103633925093-sa06hnpgi4s7v6okn3c01t464lcdebnf.apps.googleusercontent.com", //  Заглушка , тут буде id сервіса
-      redirect_uri: `http://localhost:1717/api/auth/google/callback`, //  Заглушка url сервіса /api/auth/google/callback
+      redirect_uri: `https://thawing-inlet-66513.herokuapp.com/api/auth/google/callback`, //  Заглушка url сервіса /api/auth/google/callback
       scope: [
         'https://www.googleapis.com/auth/userinfo.email',
         'https://www.googleapis.com/auth/userinfo.profile',
