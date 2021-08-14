@@ -3,6 +3,18 @@ const UserModel = require('../users/users.model');
 const Joi = require('joi');
 
 class Controllers {
+  async getAllPersonesCurrentUser(req, res, next) {
+    try {
+      req.user.populate('persones').execPopulate((error, persone) => {
+        return res.send(
+          persone.persones
+         )
+       })
+    }catch(err) {
+      next(err)
+    }
+ }
+
   addPersone = async (req, res, next) => {
     try {
       req.body.idUser = req.user._id;
@@ -14,9 +26,15 @@ class Controllers {
       user.persones.push(persone.id);
       user.save();
 
-      return res
-        .status(201)
-        .send({ id: persone._id, name: persone.name, gender: persone.gender });
+      return res.status(201).send({
+        id: persone._id,
+        name: persone.name,
+        gender: persone.gender,
+        stars: persone.stars,
+        tasks: persone.tasks,
+        presents: persone.presents,
+        idUser: persone.idUser,
+      });
     } catch (err) {
       next(err.message);
     }

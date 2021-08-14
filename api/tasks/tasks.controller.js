@@ -106,10 +106,17 @@ class TaskController {
   async confirmTask(req, res, next) {
     try {
       const { taskId } = req.params;
+      const task = await TaskModel.findById(taskId);
+      // const persone = await PersoneModel.findById(task.personeId);
+      const rewardPersone = task.reward;
       const confirmedTask = await TaskModel.findByIdAndUpdate(taskId, {
         isCompleted: 'done',
       });
-      console.log(confirmedTask);
+      await PersoneModel.findByIdAndUpdate(
+        task.personeId,
+        { stars: rewardPersone },
+        { new: true },
+      );
       return confirmedTask
         ? res.status(200).send({ message: 'Task confirmed' })
         : res.status(200).send({ message: 'Not found' });
