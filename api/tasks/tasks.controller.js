@@ -107,8 +107,9 @@ class TaskController {
     try {
       const { taskId } = req.params;
       const task = await TaskModel.findById(taskId);
-      // const persone = await PersoneModel.findById(task.personeId);
-      const rewardPersone = task.reward;
+      const persone = await PersoneModel.findById(task.personeId);
+      const star = persone.stars
+      const rewardPersone = task.reward + star;
       const confirmedTask = await TaskModel.findByIdAndUpdate(taskId, {
         isCompleted: 'done',
       });

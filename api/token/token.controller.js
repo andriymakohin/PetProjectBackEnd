@@ -43,24 +43,24 @@ class TokenController {
         },
         process.env.TOKEN_SECRET,
         {
-          expiresIn: '1h',
-        },
-      );
-
-      const refreshToken = await jwt.sign(
-        {
-          uid: user.id || user._id,
-          sid:newSession._id,
-        },
-        process.env.TOKEN_SECRET,
-        {
           expiresIn: '30d',
         },
       );
 
+      // const refreshToken = await jwt.sign(
+      //   {
+      //     uid: user.id || user._id,
+      //     sid:newSession._id,
+      //   },
+      //   process.env.TOKEN_SECRET,
+      //   {
+      //     expiresIn: '30d',
+      //   },
+      // );
+
       return res.status(200).json({
-        accessToken,
-        refreshToken,
+        accessToken
+        // refreshToken,
       });
     } catch (error) {
       console.log(error);
